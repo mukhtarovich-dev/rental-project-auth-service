@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Set;
 
+import static org.mukhtarovich.uz.Auth.Service.entity.RoleName.*;
+
 @SpringBootApplication
 public class AuthServiceApplication {
 
@@ -22,7 +24,7 @@ public class AuthServiceApplication {
 	@Bean
 	CommandLineRunner init(UserRepository userRepository, RoleRepository roleRepository) {
 		Users users = new Users();
-		for (RoleName rn : RoleName.values()) {
+		for (RoleName rn : values()) {
 			roleRepository.findByRoleName(rn)
 					.orElseGet(() -> roleRepository.save(new Role(rn)));
 		}
@@ -31,10 +33,10 @@ public class AuthServiceApplication {
 			users.setName("Dilbek");
 			users.setSurname("Mukhtarov");
 			users.setPatronymic("Mukhtarovich");
-			users.setUsername("admin");
+			users.setPhoneNumber("+998770700279");
 			users.setPassword(encoder.encode("admin"));
 			users.setIsActive(true);
-			Role adminRole = roleRepository.findByRoleName(RoleName.ADMIN).get();
+			Role adminRole = roleRepository.findByRoleName(ADMIN).get();
 			users.setRoles(Set.of(adminRole));
 			userRepository.save(users);
 		};

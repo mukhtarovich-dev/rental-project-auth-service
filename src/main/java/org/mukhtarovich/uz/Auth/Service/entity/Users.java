@@ -23,8 +23,8 @@ public class Users implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "username",unique = true,nullable = false)
-    private String username;
+    @Column(name = "phone_number",unique = true,nullable = false)
+    private String phoneNumber;
 
     @Column(nullable = false)
     private String name;
@@ -49,6 +49,11 @@ public class Users implements UserDetails {
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRoleName()))
                 .toList();
+    }
+
+    @Override
+    public String getUsername() {
+        return this.phoneNumber;
     }
 
 
