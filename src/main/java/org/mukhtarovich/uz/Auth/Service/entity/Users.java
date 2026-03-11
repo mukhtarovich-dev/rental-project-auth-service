@@ -37,7 +37,7 @@ public class Users implements UserDetails {
     @Column()
     private String patronymic;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     private Set<Role> roles;
 
     @Column(name = "password",nullable = false)
