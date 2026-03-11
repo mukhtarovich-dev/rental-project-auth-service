@@ -3,6 +3,8 @@ services:
     image: mukhtarovich/auth-service:1.2
     container_name: auth-service
     restart: always
+    depends_on:
+      - postgres
     ports:
       - "8081:8080"
     environment:
@@ -22,6 +24,7 @@ services:
       POSTGRES_PASSWORD: admin
     ports:
       - "5432:5432"
+
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
