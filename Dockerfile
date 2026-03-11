@@ -1,14 +1,19 @@
-# Base image
-FROM eclipse-temurin:17.0.4.1_1-jre
+# 1-stage: Build jar
+FROM maven:3.9.9-eclipse-temurin-17 AS builder
 
-# Workdir
+WORKDIR /app
+COPY . .
+
+RUN mvn clean package -DskipTests
+
+
+# 2-stage: Run jar
+FROM eclipse-temurin:17-jdk
+
 WORKDIR /app
 
-# Build jarni qo‘shish
-COPY target/Auth-Service-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/target/*.jar app.jar
 
-# Port
 EXPOSE 8080
 
-# Run
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.jar"]

@@ -29,7 +29,7 @@ public class AuthServiceApplication {
 					.orElseGet(() -> roleRepository.save(new Role(rn)));
 		}
 		return (args) -> {
-			if (!userRepository.findAll().isEmpty()) {
+			if (userRepository.findAll().isEmpty()) {
 				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 				users.setName("Dilbek");
 				users.setSurname("Mukhtarov");
