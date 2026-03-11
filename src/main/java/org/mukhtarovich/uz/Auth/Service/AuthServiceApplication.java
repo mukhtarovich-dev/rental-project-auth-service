@@ -29,16 +29,18 @@ public class AuthServiceApplication {
 					.orElseGet(() -> roleRepository.save(new Role(rn)));
 		}
 		return (args) -> {
-			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-			users.setName("Dilbek");
-			users.setSurname("Mukhtarov");
-			users.setPatronymic("Mukhtarovich");
-			users.setPhoneNumber("+998770700279");
-			users.setPassword(encoder.encode("admin"));
-			users.setIsActive(true);
-			Role adminRole = roleRepository.findByRoleName(ADMIN).get();
-			users.setRoles(Set.of(adminRole));
-			userRepository.save(users);
+			if (!userRepository.findAll().isEmpty()) {
+				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+				users.setName("Dilbek");
+				users.setSurname("Mukhtarov");
+				users.setPatronymic("Mukhtarovich");
+				users.setPhoneNumber("+998770700279");
+				users.setPassword(encoder.encode("admin"));
+				users.setIsActive(true);
+				Role adminRole = roleRepository.findByRoleName(ADMIN).get();
+				users.setRoles(Set.of(adminRole));
+				userRepository.save(users);
+			}
 		};
 
 	}
