@@ -31,9 +31,6 @@ public class AuthServiceApplication {
 		return (args) -> {
 			if (userRepository.findAll().isEmpty()) {
 				BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-				users.setName("Dilbek");
-				users.setSurname("Mukhtarov");
-				users.setPatronymic("Mukhtarovich");
 				users.setPhoneNumber("+998770700279");
 				users.setPassword(encoder.encode("admin"));
 				users.setIsActive(true);

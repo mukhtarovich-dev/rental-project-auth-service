@@ -7,5 +7,6 @@ public enum RoleName {
     MANAGER,
     WAREHOUSE_MANAGER,
     DRIVER,
-    ASSISTANT
+    ASSISTANT,
+    COUNTER_AGENT
 }
